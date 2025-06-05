@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Health Care Center</title>
+    <link rel="stylesheet" href="/static/styles.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
+    <script src="/static/script.js"></script>
+
+  
+   
+</head>
+<body>
+    <!-- Video Background -->
+    <div class="video-background">
+        <video autoplay muted loop id="myVideo">
+        
+            <source src="/static/medical-background.mp4.mp4" type="video/mp4">
+
+        </video>
+        <div class="overlay"></div>
+    </div>
+
+    
+    <!-- Main Content -->
+   
+
+
+<!-- Container holding both forms -->
+<div class="container form-container">
+    <div class="toggle-container" style="text-align: center; margin-bottom: 20px;">
+        <button class="toggle-btn active" onclick="toggleForm('predict')">Predict Disease</button>
+        <button class="toggle-btn" onclick="toggleForm('search')">Search for Doctor</button>
+        
+    </div>
+    
+    <!-- Predict Disease Form -->
+    <form action="/predict" method="post" id="predict-form" style="display: block;">
+        <div class="form-group">
+            <label for="symptoms" class="title-symptoms">Type your symptoms:</label>
+            <input type="text" class="form-control" id="symptoms" name="symptoms" placeholder="Type symptoms such as headache, mild fever, acidity, etc...">
+        </div>
+
+        {% if message %}
+        <p class="message-text">{{ message }}</p>
+        {% endif %}
+
+        <a class="reset-btn" href="/" id="resetButton">Reset</a>
+        
+        <div class="button-container">
+            <button type="submit" class="submit-btn">Predict</button>
+            
+        </div>
+        <h6 class="disclaimer">*if chat-gpt can make mistake, we might too </h6>
+    </form>
+
+    <!-- Search Nearby Doctors Form -->
+    <form id="pincode-form" method="POST" action="/search-maps" style="display: none;">
+        <div class="form-group">
+            <label for="symptoms" class="title-symptoms">Location:</label>
+            <input type="text" class="form-control2" id="pincode" name="pincode" placeholder="mylocation, Solapur, Pune" required maxlength="15" >
+            <h5 class="note">* Note : type "me" if you wanna current location </h5>
+        </div>
+        <div class="form-group"></div>
+        <div class="button-container">
+            <button type="submit" class="submit-btn">Search Nearby Doctors</button>
+           
+        </div>
+    </form>
+</div>
+
+{% if predicted_disease %}
+
+
+        <!-- Results -->
+        <h4 class="results-title">Predicted Results:</h4>
+        <div class="container results-container">
+           
+            <table class="results-table">
+                <thead>
+                    <tr>
+                        <label for="symptoms" class="title-symptoms">Showing predictions for {{ symptoms }}</label>
+                    
+                       
+                    </tr>
+                </thead>
+                <thead>
+                    <tr>
+                        <th scope="col">Disease</th>
+                        <th scope="col">{{ predicted_disease }}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th>Description</th>
+                        <td>{{ dis_des }}</td>
+                    </tr>
+                    <tr>
+                        <th>Precautions</th>
+                        <td>
+                            <ul>
+                                {% for i in my_precautions %}
+                                    <li>{{ i }}</li>
+                                {% endfor %}
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Medications</th>
+                        <td>
+                            <ul>
+                                {% for i in medications %}
+                                    <li>{{ i }}</li>
+                                {% endfor %}
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Workout</th>
+                        <td>
+                            <ul>
+                                {% for i in workout %}
+                                    <li>{{ i }}</li>
+                                {% endfor %}
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Diet</th>
+                        <td>
+                            <ul>
+                                {% for i in my_diet %}
+                                    <li>{{ i }}</li>
+                                {% endfor %}
+                            </ul>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    {% endif %}
+
+
+    <div class="footer">
+        <!-- Navbar -->
+         
+    <nav class="navbar">
+        <h5 class="title-name">Medical and Health Care</h5>
+        <div class="container-fluid">           
+            <div class="logo-img">           
+            <a href="/">
+                <img src="/static/doctor.png", alt="User" , style="width: 50px; height: 50px;">
+                </a>
+              </div>
+
+             
+              
+
+             
+           
+            
+        </div>
+    </nav>
+
+       
+    </div>
+
+    
+
+   
+</body>
+
+</html>

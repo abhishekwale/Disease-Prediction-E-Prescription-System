@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Prediction History - Health Care Center</title>
+    <link rel="stylesheet" href="/static/styles.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
+</head>
+<body>
+    <!-- Video Background -->
+    <div class="video-background">
+        <video autoplay muted loop id="myVideo">
+            <source src="/static/medical-background.mp4.mp4" type="video/mp4">
+        </video>
+        <div class="overlay"></div>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <h5 class="title-name">Medical and Health Care</h5>
+        <div class="container-fluid">
+            <div class="logo-img">
+                <a href="/">
+                    <img src="/static/doctor.png" alt="User" style="width: 50px; height: 50px;">
+                </a>
+            </div>
+            <div class="nav-links">
+                {% if user_email != 'Unknown' %}
+                    <span>Welcome, {{ user_email }}!</span>
+                    <a href="/predict">Make a Prediction</a>
+                    <a href="/logs">View Prediction History</a>
+                    <a href="/logout">Logout</a>
+                {% else %}
+                    <a href="/login">Login</a>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+
+    <!-- Prediction History -->
+    <h4 class="results-title">Your Prediction History</h4>
+    <div class="container logs-container">
+        {% if logs %}
+            <table class="logs-table">
+                <thead>
+                    <tr>
+                        <th>User Email</th>
+                        <th>Predicted Disease</th>
+                        <th>Symptoms</th>
+                        <th>Timestamp</th>
+                        <th>Location</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for log in logs %}
+                        <tr>
+                            <td>{{ log.user_email }}</td>
+                            <td>{{ log.predicted_disease }}</td>
+                            <td>{{ log.symptoms|join(', ') }}</td>
+                            <td>{{ log.timestamp }}</td>
+                            <td>{{ log.get('pincode', 'Not provided') }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p class="message-text">No prediction history available.</p>
+        {% endif %}
+    </div>
+
+    <div class="footer">
+        <!-- Footer content can be added here if needed -->
+    </div>
+</body>
+</html>
