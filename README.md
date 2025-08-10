@@ -13,7 +13,7 @@ A Flask-based web application that predicts diseases based on symptoms using mac
 ### 1. Clone and Setup Environment
 ```bash
 # Clone the repository (if using git)
-git clone <repository-url>
+git clone https://github.com/abhishekwale/Disease-Prediction-E-Prescription-System
 cd myFlaskApp
 
 # Create and activate virtual environment
