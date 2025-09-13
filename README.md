@@ -1,6 +1,6 @@
 # Disease Prediction System
 
-**Deployed App**: [https://disease.onrender.com/](https://disease.onrender.com/)
+**Deployed App**: [ https://disease-prediction-e-prescription-system.onrender.com](https://disease.onrender.com/)
 
 A Flask-based web application that predicts diseases based on symptoms using machine learning. The system includes user authentication via AWS Cognito and email notifications via AWS SES.
 
