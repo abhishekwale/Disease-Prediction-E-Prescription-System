@@ -11,20 +11,19 @@ load_dotenv()
 def init_auth(app):
     """Initialize OAuth for Cognito authentication."""
     oauth = OAuth(app)
-    redirect_uri = os.getenv('COGNITO_REDIRECT_URI', 'http://localhost:5000/authorize')  # Dynamic redirect URI
     oauth.register(
-        name='oidc',
-        authority=os.getenv('COGNITO_AUTHORITY'),
-        client_id=os.getenv('COGNITO_CLIENT_ID'),
-        client_secret=os.getenv('COGNITO_APP_CLIENT_SECRET'),
-        server_metadata_url=os.getenv('COGNITO_METADATA_URL'),
-        client_kwargs={
-            'scope': 'email openid phone',
-            'redirect_uri': redirect_uri,
-            'token_endpoint_auth_method': 'client_secret_post',
-            'state': secrets.token_urlsafe(16)
-        }
-    )
+    name='oidc',
+    authority=os.getenv('COGNITO_AUTHORITY'),
+    client_id=os.getenv('COGNITO_CLIENT_ID'),
+    client_secret=os.getenv('COGNITO_APP_CLIENT_SECRET'),
+    server_metadata_url=os.getenv('COGNITO_METADATA_URL'),
+    client_kwargs={
+        'scope': 'email openid phone',
+        'redirect_uri': 'http://localhost:5000/authorize',
+        'token_endpoint_auth_method': 'client_secret_post',
+        'state': secrets.token_urlsafe(16)
+    }
+)
     return oauth
 
 def auth_required():
@@ -52,9 +51,8 @@ def setup_auth_routes(app, oauth):
             if key != 'oauth_state':
                 session.pop(key)
         
-        redirect_uri = os.getenv('COGNITO_REDIRECT_URI', 'http://localhost:5000/authorize')
         return oauth.oidc.authorize_redirect(
-            redirect_uri,
+            'http://localhost:5000/authorize',
             state=state
         )
 

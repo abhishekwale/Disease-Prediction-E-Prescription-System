@@ -1,0 +1,34 @@
+# Python cache and compiled files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environment
+venv/
+env/
+
+# Environment variables (sensitive)
+.env
+
+# Git and version control
+.git
+.gitignore
+
+# Editor and OS-specific files
+.DS_Store
+*.swp
+*.swo
+.vscode/
+.idea/
+
+# Development artifacts
+instance/
+*.pid
+*.sqlite
+
+# Documentation and miscellaneous
+*.md
+LICENSE
+screenshots/
+*.toml

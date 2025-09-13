@@ -25,7 +25,6 @@ oauth = init_auth(app)
 setup_auth_routes(app, oauth)
 
 @app.route('/')
-@auth_required()  # Redirect unauthenticated users to /login
 def index():
     user_email = get_user_email()
     login_success = request.args.get('login', False)  # Check for login parameter
@@ -38,7 +37,7 @@ def home():
     return render_template('home.html', user_email=user_email)
 
 @app.route('/predict', methods=['GET', 'POST'])
-@auth_required()  # Enforce authentication
+#@auth_required()
 def predict():
     user_email = get_user_email()
     if request.method == 'POST':
