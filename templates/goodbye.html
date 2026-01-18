@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Health Care Center - Welcome</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Video Background -->
+    <div class="video-background">
+        <video autoplay muted loop id="myVideo">
+            <source src="{{ url_for('static', filename='medical-background.mp4') }}" type="video/mp4">
+        </video>
+        <div class="overlay"></div>
+    </div>
+
+    <div class="welcome-container">
+        <div class="welcome-content">
+            <h1>Welcome to Medical & Health Care</h1>
+            <p class="subtitle">Predict diseases • Find nearby doctors • Get personalized health insights</p>
+
+            <div class="action-buttons">
+                <a href="{{ url_for('login') }}" class="btn primary-btn">
+                    Login with AWS Cognito
+                </a>
+                <!-- Optional: allow guest access if you want -->
+                <!-- <a href="{{ url_for('index') }}" class="btn secondary-btn">Continue as Guest</a> -->
+            </div>
+
+            <p class="info">Secure authentication powered by AWS Cognito</p>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Health Care Center. All rights reserved.</p>
+    </footer>
+</body>
+</html>
